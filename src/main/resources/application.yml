@@ -52,7 +52,7 @@ springdoc:
 
 rest:
   security:
-    enabled: false
+    enabled: true
     api-matcher: /phonebook/**
     cors:
       allowed-origins: "*"

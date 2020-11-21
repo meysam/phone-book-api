@@ -18,11 +18,11 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .addServersItem(new Server()
                         .description("DEV Server")
-                        .url("https://api-dev.covidmonitor.tech"))
+                        .url("https://api-dev.paisley.digital"))
                 .components(new Components())
                 .info(new io.swagger.v3.oas.models.info.Info()
-                        .description("Covid Notifier RESTful service using springdoc-openapi and OpenAPI 3")
-                        .title("Covid Notifier Application API")
+                        .description("Phone Book RESTful service using springdoc-openapi and OpenAPI 3")
+                        .title("Phone Book Application API")
                         .version(apiVersion));
     }
 }

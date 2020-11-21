@@ -116,11 +116,6 @@
 			<artifactId>spring-cloud-starter-kubernetes-all</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cloud-connectors</artifactId>
-			<version>2.2.6.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 			<exclusions>
@@ -192,7 +187,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.12</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -321,6 +317,7 @@
 				<version>2.2.5.RELEASE</version>
 				<extensions>true</extensions>
 				<configuration>
+					<testFramework>JUNIT5</testFramework>
 					<testMode>EXPLICIT</testMode>
 					<baseClassForTests>BaseClass</baseClassForTests>
 				</configuration>
