@@ -1,16 +1,16 @@
 package digital.paisley.phonebook;
 
-import digital.paisley.phonebook.entities.Dummy;
+import digital.paisley.phonebook.dto.ContactDto;
+import digital.paisley.phonebook.dto.GitHubUserDto;
+import digital.paisley.phonebook.entities.Contact;
 import io.restassured.response.Response;
+import org.assertj.core.api.Assertions;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
-
-import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
-public class TestSupport extends Assert {
+public class TestSupport extends Assertions {
 
     public TestSupport() {
     }
@@ -51,15 +51,35 @@ public class TestSupport extends Assert {
         return new JSONObject(response.getBody().asString());
     }
 
-    protected Dummy getDummy(Long id) {
-        return Dummy.builder().id(id).dummy("dummy").build();
+    protected GitHubUserDto gitHubUserDto(){
+        return new GitHubUserDto(0, "user", 0);
     }
 
-    protected List<Dummy> getListDummies() {
-        List<Dummy> dummies = new ArrayList<>();
-        dummies.add(getDummy(0L));
-        return dummies;
+    protected ContactDto getContactDto(){
+        return  ContactDto.builder()
+                .address("Address Test")
+                .firstName("Meysam")
+                .lastName("Tamkin")
+                .phoneNumber("+098 (707) 777-1234")
+                .email("meysam.tamkin@gmail.com")
+                .build();
     }
+
+    protected Contact getContact(){
+        return  Contact.builder()
+                .address("Address Test")
+                .firstName("Meysam")
+                .lastName("Tamkin")
+                .email("meysam.tamkin@gmail.com")
+                .build();
+    }
+
+
+//    protected List<Dummy> getListDummies() {
+//        List<Dummy> dummies = new ArrayList<>();
+//        dummies.add(getDummy(0L));
+//        return dummies;
+//    }
 
 
 }

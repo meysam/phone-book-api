@@ -80,4 +80,4 @@ spring:
     enabled: false
 phonebook-config:
   message:  a message that can be changed live
-  clientUrl: http://localhost:8089/
+  githubUrl: https://api.github.com/users/

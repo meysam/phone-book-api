@@ -7,28 +7,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactMapper {
 
-    PhoneMapper phoneMapper = new PhoneMapper();
-    AddressMapper addressMapper = new AddressMapper();
-    EmailMapper emailMapper = new EmailMapper();
-
-    public ContactDto mapContactToDtoFull(Contact contact) {
-        return new ContactDto(contact.getId(),
-                contact.getFirstName(),
-                contact.getLastName(),
-                contact.getDescription(),
-                contact.getOrganization(),
-                contact.getGithubUserName(),
-                phoneMapper.mapListPhoneToDto(contact.getPhoneNumbers()),
-                addressMapper.mapListAddressToDto(contact.getAddresses()),
-                emailMapper.mapListEmailToDto(contact.getEmails()));
+    public ContactDto mapContactToDto(Contact contact) {
+        return ContactDto.builder()
+                .id(contact.getId())
+                .address(contact.getAddress())
+                .description(contact.getDescription())
+                .firstName(contact.getFirstName())
+                .lastName(contact.getLastName())
+                .githubUserName(contact.getGithubUserName())
+                .phoneNumber(contact.getPhoneNumber())
+                .organization(contact.getOrganization())
+                .email(contact.getEmail())
+                .build();
     }
 
-    public ContactDto mapContactToDto(Contact contact) {
-        return new ContactDto(contact.getId(),
-                contact.getFirstName(),
-                contact.getLastName(),
-                contact.getDescription(),
-                contact.getOrganization(),
-                contact.getGithubUserName());
+    public Contact mapDtoToContact(ContactDto contactDto) {
+        return Contact.builder()
+                .address(contactDto.address)
+                .description(contactDto.description)
+                .firstName(contactDto.firstName)
+                .lastName(contactDto.lastName)
+                .githubUserName(contactDto.githubUserName)
+                .phoneNumber(contactDto.phoneNumber)
+                .organization(contactDto.organization)
+                .email(contactDto.email)
+                .build();
     }
 }

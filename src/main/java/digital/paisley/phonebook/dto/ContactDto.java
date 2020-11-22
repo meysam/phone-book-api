@@ -1,15 +1,18 @@
 package digital.paisley.phonebook.dto;
 
+import digital.paisley.phonebook.validation.annotation.ValidPhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ValidPhoneNumber()
 public class ContactDto {
 
     public int id;
@@ -24,19 +27,12 @@ public class ContactDto {
 
     public String githubUserName;
 
-    @Builder.Default
-    public List<PhoneDto> phoneNumbers = new ArrayList<>();
-    @Builder.Default
-    public List<AddressDto> addresses = new ArrayList<>();
-    @Builder.Default
-    public List<EmailDto> emails = new ArrayList<>();
+    @Email(message = "Please, check entered email is correct",
+            regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,10}$")
+    public String email;
 
-    public ContactDto(int id, String firstName, String lastName, String description, String organization, String githubUserName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-        this.organization = organization;
-        this.githubUserName = githubUserName;
-    }
+    public String phoneNumber;
+
+    public String address;
+
 }

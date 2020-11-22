@@ -1,16 +1,16 @@
 package digital.paisley.phonebook.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 public class Contact {
 
@@ -27,55 +27,39 @@ public class Contact {
     private String organization;
     @Setter
     private String githubUserName;
-
-
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private final List<Email> emails = new ArrayList<>();
-
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private final List<Phone> phones = new ArrayList<>();
-
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private final List<Address> addresses = new ArrayList<>();
+    @Setter
+    private String email;
+    @Setter
+    private String phoneNumber;
+    @Setter
+    private  String address;
 
     public Contact(String firstName) {
         this.firstName = firstName;
     }
 
-    public void addAddress(Address address) {
-        addresses.add(address);
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void addPhone(Phone phone) {
-        phones.add(phone);
+    public String getLastName() {
+        return lastName;
     }
 
-    public void addEmail(Email email) {
-        emails.add(email);
+    public String getDescription() {
+        return description;
     }
 
-    public void addPhones(List<Phone> numbers) {
-        phones.addAll(numbers);
+    public String getEmail() {
+        return email;
     }
 
-    public void addAddresses(List<Address> addresses) {
-        this.addresses.addAll(addresses);
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void addEmails(List<Email> emails) {
-        this.emails.addAll(emails);
-    }
-
-    public List<Phone> getPhoneNumbers() {
-        return Collections.unmodifiableList(phones);
-    }
-
-    public List<Address> getAddresses() {
-        return Collections.unmodifiableList(addresses);
-    }
-
-    public List<Email> getEmails() {
-        return Collections.unmodifiableList(emails);
+    public String getAddress() {
+        return address;
     }
 
     public String getOrganization() {

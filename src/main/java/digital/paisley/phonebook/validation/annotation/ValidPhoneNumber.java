@@ -18,11 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface ValidPhoneNumber {
 
-    int minValue();
-
-    int maxValue();
-
-    String message() default "The phone number should be greater than 9 digits and less than 16 digits";
+    String message() default "The phone number should be like this number (+098 (707) 777-1234)";
 
     Class<?>[] groups() default {};
 

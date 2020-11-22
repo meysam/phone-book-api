@@ -14,11 +14,11 @@ import javax.annotation.PostConstruct;
 public class ConfigMaps {
 
     private String message;
-    private String clientUrl;
+    private String githubUrl;
 
     @PostConstruct
     private void checkProps() {
         log.info("message is: \n\n{}", message);
-        log.info("client url is: \n\n{}", clientUrl);
+        log.info("client url is: \n\n{}", githubUrl);
     }
 }
