@@ -7,7 +7,7 @@ For building and running the application you need:
 - [JDK 11](https://openjdk.java.net/projects/jdk/11/)
 - [Maven 3](https://maven.apache.org)
 - [Common Library](https://github.com/Paisley-Digital/cross-cutting)
-    - Before Using phonebook api you should compile and add this project. You can use this command: `mvn clean install`.
+    - Before using phonebook api you should compile and add this project. You can use this command: `mvn clean install`.
     
 ## Running the application locally
 
