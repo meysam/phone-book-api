@@ -33,31 +33,13 @@ class ApiControllerTest extends TestSupport {
         apiControllerUnderTest = new ContactController(mockObjectMapper, mockContactService);
     }
 
-    @Test
-    void testGetObjectMapper() {
-        // Setup
-
-        // Run the test
-        final Optional<ObjectMapper> result = apiControllerUnderTest.getObjectMapper();
-
-        // Verify the results
-    }
-
-    @Test
-    void testGetRequest() {
-        // Setup
-
-        // Run the test
-        final Optional<HttpServletRequest> result = apiControllerUnderTest.getRequest();
-
-        // Verify the results
-    }
 
     @Test
     void testAddContact() {
         // Setup
         when(mockContactService.add(any())).thenReturn(getContact());
-        ContactDto contactDto = getContactDto();
+        ContactDto contactDto;
+        contactDto = getContactDto();
         // Run the test
         final ResponseEntity<?> result = apiControllerUnderTest.addContact(contactDto);
 

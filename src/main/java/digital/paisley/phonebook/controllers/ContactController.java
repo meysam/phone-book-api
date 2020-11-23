@@ -2,7 +2,6 @@ package digital.paisley.phonebook.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import digital.paisley.phonebook.apis.ContactApi;
-import digital.paisley.phonebook.clients.GithubClient;
 import digital.paisley.phonebook.dto.ContactDto;
 import digital.paisley.phonebook.entities.Contact;
 import digital.paisley.phonebook.mapper.ContactMapper;

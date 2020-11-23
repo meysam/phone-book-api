@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @NoArgsConstructor
-public class ClientRestErrorException {
+public class ClientRestErrorException extends Exception {
 
     public void throwRestErrorException(Exception e) {
         try {

@@ -25,11 +25,13 @@ public class ContactSpecificationsBuilder {
             return null;
         }
 
-        List<Specification> specs = params.stream()
+        List<Specification> specs;
+        specs = params.stream()
                 .map(ContactSpecification::new)
                 .collect(Collectors.toList());
 
-        Specification result = specs.get(0);
+        Specification result;
+        result = specs.get(0);
 
         for (int i = 1; i < params.size(); i++) {
             result = params.get(i)

@@ -75,22 +75,19 @@ public class HttpClientConfig {
 
     @Bean
     public ConnectionKeepAliveStrategy connectionKeepAliveStrategy() {
-        return new ConnectionKeepAliveStrategy() {
-            @Override
-            public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
-                HeaderElementIterator it = new BasicHeaderElementIterator
-                        (response.headerIterator(HTTP.CONN_KEEP_ALIVE));
-                while (it.hasNext()) {
-                    HeaderElement he = it.nextElement();
-                    String param = he.getName();
-                    String value = he.getValue();
+        return (response, context) -> {
+            HeaderElementIterator it = new BasicHeaderElementIterator
+                    (response.headerIterator(HTTP.CONN_KEEP_ALIVE));
+            while (it.hasNext()) {
+                HeaderElement he = it.nextElement();
+                String param = he.getName();
+                String value = he.getValue();
 
-                    if (value != null && param.equalsIgnoreCase("timeout")) {
-                        return Long.parseLong(value) * 1000;
-                    }
+                if (value != null && param.equalsIgnoreCase("timeout")) {
+                    return Long.parseLong(value) * 1000;
                 }
-                return DEFAULT_KEEP_ALIVE_TIME_MILLIS;
             }
+            return DEFAULT_KEEP_ALIVE_TIME_MILLIS;
         };
     }
 

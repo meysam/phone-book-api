@@ -85,10 +85,11 @@ public class GithubClient {
             log.error("Exception", e);
             restErrorException.throwRestErrorException(e);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<String> failed(String userName) {
+        log.error("GitHub User is" + userName);
         log.error("GitHub APIs is out of service");
         return Collections.emptyList();
     }

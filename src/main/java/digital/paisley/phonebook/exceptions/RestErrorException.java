@@ -5,12 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class RestErrorException extends RuntimeException {
-	private static final String STATUS_PROP_NAME = "status";
-	private static final String CODE_PROP_NAME = "code";
-	private static final String MESSAGE_PROP_NAME = "message";
-	private static final String DEVELOPER_MESSAGE_PROP_NAME = "developerMessage";
-	private static final String MORE_INFO_PROP_NAME = "moreInfo";
-	private static final String DEFAULT_MORE_INFO_URL = "mailto:support@bgleam.com";
 	private int status;
 	private int code;
 	private String message;
@@ -43,9 +37,10 @@ public class RestErrorException extends RuntimeException {
 		return Objects.hash(new Object[]{this.status, this.code, this.message, this.developerMessage, this.moreInfoUrl, this.throwable});
 	}
 
-	public String toString() {
-		return this.append(new StringBuilder(), this.getStatus()).append(", message: ").append(this.getMessage()).append(", code: ").append(this.getCode()).append(", developerMessage: ").append(this.getDeveloperMessage()).append(", moreInfoUrl: ").append(this.getMoreInfoUrl()).toString();
-	}
+@Override
+public String toString() {
+	return this.append(new StringBuilder(), this.getStatus()).append(", message: ").append(this.getMessage()).append(", code: ").append(this.getCode()).append(", developerMessage: ").append(this.getDeveloperMessage()).append(", moreInfoUrl: ").append(this.getMoreInfoUrl()).toString();
+}
 
 	private StringBuilder append(StringBuilder buf, int status) {
 		buf.append(status);
@@ -64,6 +59,7 @@ public class RestErrorException extends RuntimeException {
 		return this.code;
 	}
 
+	@Override
 	public String getMessage() {
 		return this.message;
 	}
@@ -84,51 +80,6 @@ public class RestErrorException extends RuntimeException {
 		this.customData = customData;
 	}
 
-	public Map<String, ?> toMap() {
-		Map<String, Object> m = new LinkedHashMap();
-		int status = this.getStatus();
-		m.put("status", status);
-		int code = this.getCode();
-		if (code <= 0) {
-			code = status;
-		}
-
-		m.put("code", code);
-		String httpStatusMessage = null;
-		String message = this.getMessage();
-		if (message == null) {
-			httpStatusMessage = this.toString(status);
-			message = httpStatusMessage;
-		}
-
-		m.put("message", message);
-		String devMsg = this.getDeveloperMessage();
-		if (devMsg == null) {
-			if (httpStatusMessage == null) {
-				httpStatusMessage = this.toString(status);
-			}
-
-			devMsg = httpStatusMessage;
-			Throwable t = this.getThrowable();
-			if (t != null) {
-				devMsg = httpStatusMessage + ": " + t.getMessage();
-			}
-		}
-
-		m.put("developerMessage", devMsg);
-		String moreInfoUrl = this.getMoreInfoUrl();
-		if (moreInfoUrl == null) {
-			moreInfoUrl = "mailto:support@bgleam.com";
-		}
-
-		m.put("moreInfo", moreInfoUrl);
-		if (this.customData != null && !this.customData.isEmpty()) {
-			m.putAll(this.customData);
-		}
-
-		return m;
-	}
-
 	public static class Builder {
 		private int status;
 		private int code;
@@ -137,9 +88,6 @@ public class RestErrorException extends RuntimeException {
 		private String moreInfoUrl;
 		private Throwable throwable;
 		private Map<String, Object> customData = new LinkedHashMap();
-
-		public Builder() {
-		}
 
 		public Builder setStatus(int statusCode) {
 			this.status = statusCode;

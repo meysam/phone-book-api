@@ -23,13 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {ContactController.class, ContactService.class, ContactRepository.class})
 @SpringBootTest(classes = Application.class)
-public class ContractControllerIT extends TestSupport {
+class ContractControllerIT extends TestSupport {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void should_return_200_ok_when_add_a_contact() throws Exception {
+    void should_return_200_ok_when_add_a_contact() throws Exception {
         ContactDto contactDto = getContactDto();
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

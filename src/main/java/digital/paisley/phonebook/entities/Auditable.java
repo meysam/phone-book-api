@@ -18,7 +18,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public abstract class Auditable<U> {
+public abstract class Auditable {
 
     @CreatedDate
     @Temporal(TIMESTAMP)
