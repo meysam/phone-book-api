@@ -45,3 +45,22 @@ After running thr App you can use this [URL](http://localhost:8080/swagger-ui) t
 You can find here all documents related to this project:
 [Notion Documents](https://www.notion.so/Phone-Book-APIs-77b1b85c5b32424d9ccc997d95e6cd65)
 
+## Sample Request
+* Add new contact:
+```shell
+curl -X POST "https://api-dev.paisley.digital/contacts" -H "accept: application/json" -H "Content-Type: application/json" -d 
+"{
+  "firstName": "string",
+  "lastName": "string",
+  "description": "string",
+  "organization": "string",
+  "githubUserName": "burrsutter",
+  "email": "meysam.tamkin@gmail.com",
+  "phoneNumber": "+098 (707) 777-1234",
+  "address": "string"
+}"
+```
+* Search contact:
+```shell
+curl -X GET "https://localhost:8080/contacts?search=address:string,lastName:meysam" -H "accept: application/json"
+```
