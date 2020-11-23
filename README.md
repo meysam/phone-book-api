@@ -6,7 +6,9 @@ For building and running the application you need:
 
 - [JDK 11](https://openjdk.java.net/projects/jdk/11/)
 - [Maven 3](https://maven.apache.org)
-
+- [Common Library](https://github.com/Paisley-Digital/cross-cutting)
+    - Before Using phonebook api you should compile and add this project. You can use this command: `mvn clean install`.
+    
 ## Running the application locally
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `digital.paisley.phonebook.Application` class from your IDE.
