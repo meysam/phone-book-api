@@ -1,5 +1,6 @@
-FROM openjdk:11-jdk-alpine
+FROM adoptopenjdk/openjdk11:alpine-jre
 VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} phonebook.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+ARG JAR_FILE=target/phonebook.jar
+WORKDIR /opt/app
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

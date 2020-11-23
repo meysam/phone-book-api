@@ -1,7 +1,6 @@
 package digital.paisley.phonebook.services;
 
 import digital.paisley.phonebook.clients.GithubClient;
-import digital.paisley.phonebook.dto.GitHubUserDto;
 import digital.paisley.phonebook.entities.Contact;
 import digital.paisley.phonebook.repositories.ContactRepository;
 import digital.paisley.phonebook.repositories.ContactSpecificationsBuilder;
@@ -15,8 +14,6 @@ import java.util.regex.Pattern;
 @Service
 public class ContactService {
 
-    static final String CONTACT_DOES_NOT_EXIST = "Error! This contact doesn't exist";
-
     final ContactRepository contactRepository;
 
     private final GithubClient githubClient;
@@ -27,7 +24,6 @@ public class ContactService {
     }
 
     public Contact add(Contact contact) {
-        //User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException(UserService.USER_DOES_NOT_EXIST));
         contact.setRepos(githubClient.getRepos(contact.getGithubUserName()));
         return contactRepository.save(contact);
     }

@@ -1,5 +1,7 @@
 package digital.paisley.phonebook.clients;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import digital.paisley.phonebook.config.ConfigMaps;
 import digital.paisley.phonebook.dto.GitHubRepoDto;
 import digital.paisley.phonebook.dto.GitHubUserDto;
@@ -12,10 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,7 +36,7 @@ public class GithubClient {
             ResponseEntity<GitHubUserDto> response = restTemplate.getForEntity(uri, GitHubUserDto.class,
                     new HashMap<String, String>());
             if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException(userName + " does not exist in github");
             } else {
                 return response.getBody();
             }
@@ -53,12 +52,19 @@ public class GithubClient {
         return null;
     }
 
+    @HystrixCommand(fallbackMethod = "failed", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "20000"),
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "4"),
+            @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "10000"),
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "30000")
+    }, ignoreExceptions = {HttpClientErrorException.class, EntityNotFoundException.class})
     public List<String> getRepos(String userName) {
         final String uri = githubUrl.concat(userName).concat("/repos?sort=created&direction=desc&per_page=100&page=");
         List<GitHubRepoDto> repos = new ArrayList<>();
         GitHubUserDto gitHubUser = getGitHubUser(userName);
         try {
-            long totalPage = getTotalPage(gitHubUser.totalPublicRepos, 100);
+            long totalPage = getTotalPageNumber(gitHubUser.totalPublicRepos, 100);
             for (int i = 1; i <= totalPage; i++) {
                 ResponseEntity<GitHubRepoDto[]> response = restTemplate.getForEntity(uri.concat(String.valueOf(i)), GitHubRepoDto[].class,
                         new HashMap<String, String>());
@@ -82,7 +88,12 @@ public class GithubClient {
         return null;
     }
 
-    private long getTotalPage(long num, long divisor) {
+    public List<String> failed(String userName) {
+        log.error("GitHub APIs is out of service");
+        return Collections.emptyList();
+    }
+
+    private long getTotalPageNumber(long num, long divisor) {
         return (num + divisor - 1) / divisor;
     }
 }
