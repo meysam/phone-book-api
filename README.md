@@ -36,7 +36,7 @@ sudo docker build -t phonebook:1.0 .
 
 3. Start the docker container phonebook:1.0, run the /opt/app/app.jar file during startup.
 ```shell
-sudo docker run -d -p 8080:8080 -t spring-boot:1.0
+sudo docker run -d -p 8080:8080 -t phonebook:1.0
 ```
 4. use this URL http://localhost:8080/
 
