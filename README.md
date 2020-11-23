@@ -1,4 +1,4 @@
-# Simple springboot-phonebook-api
+# Simple Springboot Phonebook API
 
 ## Requirements
 
