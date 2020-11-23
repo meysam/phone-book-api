@@ -1,22 +1,22 @@
 package digital.paisley.phonebook.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import java.util.Date;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class GitHubRepoDto {
 
     public int id;
 
     public String name;
 
-    public String owner;
-
+    @JsonProperty("created_at")
     public Date createdAt;
 
 }

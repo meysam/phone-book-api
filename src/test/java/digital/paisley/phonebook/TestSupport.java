@@ -52,7 +52,7 @@ public class TestSupport extends Assertions {
     }
 
     protected GitHubUserDto gitHubUserDto(){
-        return new GitHubUserDto(0, "user", 0);
+        return new GitHubUserDto(0, "user", 0,null);
     }
 
     protected ContactDto getContactDto(){

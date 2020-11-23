@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,10 @@ public class GitHubUserDto {
     @JsonProperty("login")
     public String user;
 
-    @JsonProperty("device_uuid")
+    @JsonProperty("public_repos")
     public int totalPublicRepos;
+
+    public List<GitHubRepoDto> repos;
+
 
 }

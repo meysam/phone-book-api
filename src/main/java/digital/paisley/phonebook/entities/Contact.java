@@ -2,10 +2,10 @@ package digital.paisley.phonebook.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -33,6 +33,9 @@ public class Contact {
     private String phoneNumber;
     @Setter
     private  String address;
+    @Setter
+    @ElementCollection
+    private List<String> repos;
 
     public Contact(String firstName) {
         this.firstName = firstName;
@@ -68,5 +71,9 @@ public class Contact {
 
     public String getGithubUserName() {
         return githubUserName;
+    }
+
+    public List<String> getRepos() {
+        return repos;
     }
 }
