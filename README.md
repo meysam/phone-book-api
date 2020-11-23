@@ -1,4 +1,4 @@
-# springboot-phonebook-api
+# Simple springboot-phonebook-api
 
 ## Requirements
 
@@ -44,6 +44,7 @@ After running thr App you can use this [URL](http://localhost:8080/swagger-ui) t
 ## Document
 You can find here all documents related to this project:
 [Notion Documents](https://www.notion.so/Phone-Book-APIs-77b1b85c5b32424d9ccc997d95e6cd65)
+
 Also, you can find Tech Spec here:
 [Tech Spec](https://www.notion.so/Tech-Spec-bc4a95cea260485685e66429fc84e42a)
 
